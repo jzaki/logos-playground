@@ -6,7 +6,8 @@ Misc logos things, hopefully helpful.
 
 - [Logos Basecamp](#logos-basecamp)
 - [First build](#first-build)
-- [Browsing modules](#browsing-modules)
+- [Finding modules and corresponding repo urls](#finding-modules-and-corresponding-repo-urls)
+- [Logos module in rust](#logos-module-in-rust)
 
 ## Logos Basecamp
 

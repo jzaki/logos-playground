@@ -12,12 +12,9 @@ if [[ -v RELEASE_TAG && -n "$RELEASE_TAG" ]]; then
     CATALOG_URL="${CATALOG_BASE_URL}download/${RELEASE_TAG}/list.json"
 fi
 
-GITMODULES_BASE_URL="https://raw.githubusercontent.com/logos-co/logos-modules/"
-GITMODULES_LATEST_PATH="master/.gitmodules"
-
-GITMODULES_URL="${GITMODULES_BASE_URL}${GITMODULES_LATEST_PATH}"
+GITMODULES_URL="https://raw.githubusercontent.com/logos-co/logos-workspace/master/.gitmodules"
 if [[ -v RELEASE_TAG && -n "$RELEASE_TAG" ]]; then
-  GITMODULES_URL="${GITMODULES_BASE_URL}/refs/tags/${RELEASE_TAG}/.gitmodules"
+    echo "Note: urls only refer to their latest repository location"
 fi
 
 VERBOSE=0
@@ -30,7 +27,7 @@ done
 
 echo "Fetching catalog of modules"
 echo "Note: urls are from the latest .gitmodules, so may not be complete for pre-releases"
-
+echo
 curl -sL "$CATALOG_URL" | python3 -c "
 import json, sys, re, urllib.request
 
@@ -44,7 +41,7 @@ for line in raw.splitlines():
     line = line.strip()
     m = re.match(r'\[submodule \"(.+)\"\]', line)
     if m:
-        current = m.group(1)
+        current = m.group(1).split('/')[-1]
     elif current and line.startswith('url ='):
         url = line.split('=', 1)[1].strip().removesuffix('.git')
         module_urls[current] = url
