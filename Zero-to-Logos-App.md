@@ -1,7 +1,5 @@
 # Zero to Logos App - a consolidated fly-over
 
-(original [hackmd](https://hackmd.io/@jameszaki/SJWU33dTbe))
-
 This document is intended to get you right into understanding the essentials of building on Logos.
 
 From Zero to Logos App in the shortest amount of time, with optional extras along the way.
@@ -104,7 +102,8 @@ Now run your app in standalone mode:
 
 # Create portable artifact, and run in Basecamp
 
-- Download the latest [pre-release of Basecamp](https://github.com/logos-co/logos-basecamp/releases)
+- Download a recent version of Basecamp
+  - v0.1.2 Release Candidate 3 [here](https://github.com/logos-co/logos-basecamp/releases/tag/untagged-b54c4d0ae59852515fb2)
   - Or an older [tagged version](https://github.com/logos-co/logos-basecamp/releases?q=prerelease%3Afalse&expanded=true)
 
 ## Build app into LGX package

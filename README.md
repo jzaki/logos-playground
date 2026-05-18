@@ -7,13 +7,14 @@ Misc logos things, hopefully helpful.
 - [Logos Basecamp](#logos-basecamp)
 - [First build](#first-build)
 - [Finding modules and corresponding repo urls](#finding-modules-and-corresponding-repo-urls)
-- [Logos module in rust](#logos-module-in-rust)
+- [The core between modules](#the-core-between-modules)
+  - [Logos SDKs](#logos-sdks)
 
 ## Logos Basecamp
 
 https://press.logos.co/article/logos-basecamp
 
-Basecamp version [0.1.2](https://github.com/logos-co/logos-basecamp/releases?q=0.1.2) is on it's way! Try the Release Candidate.
+Basecamp version [0.1.2](https://github.com/logos-co/logos-basecamp/releases?q=0.1.2) is on it's way! Try the latest Release Candidate.
 
 ## First build
 
@@ -22,7 +23,7 @@ Get the tools, build your first local app on Logos.
 
 ## Finding modules and corresponding repo urls
 
-As we approach version 0.1.2 (currently on RC2), the module lists can be inspected in two ways:
+As we approach version 0.1.2 (currently on RC3), the module lists can be inspected in two ways:
 
 - "latest" or a release tag - showing all modules for master or that release
 - pre-release - showing the modules that were ready when the pre-release was made (likely not all modules)
@@ -36,7 +37,7 @@ Note: there is a wallet ui and wallet module in both logos-co, and logos-blockch
 ### Full names and description most urls
 
 See/run `./scripts/list-modules.sh` in this repo (lists latest by default)
-Can list pre-releases eg `RELEASE_TAG="build-20260430-d41c2d0-87" ./scripts/list-modules.sh`
+Can list pre-releases eg `RELEASE_TAG="build-20260514-faaa8d1-97" ./scripts/list-modules.sh`
 
 ### Full descriptions (truncated names, no urls)
 
@@ -56,7 +57,7 @@ nix build 'github:logos-co/logos-package-downloader#cli' --out-link ./downloader
 
 # List packages from release
 ./downloader/bin/lgpd releases
-./downloader/bin/lgpd list --release build-20260430-d41c2d0-87
+./downloader/bin/lgpd list --release build-20260514-faaa8d1-97
 ```
 
 (Ref: [Logos Developer Guide](https://github.com/logos-co/logos-tutorial/blob/master/logos-developer-guide.md#53-downloading-and-installing-from-a-registry))

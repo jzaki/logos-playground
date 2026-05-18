@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Optional: set RELEASE_TAG to a specific release tag to list modules for that release instead of latest
-# RELEASE_TAG="build-20260430-d41c2d0-87"
+RELEASE_TAG="build-20260514-faaa8d1-97"
 
 CATALOG_BASE_URL="https://github.com/logos-co/logos-modules/releases/"
 CATALOG_LATEST="latest/download/list.json"
