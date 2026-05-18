@@ -13,7 +13,7 @@ Misc logos things, hopefully helpful.
 
 https://press.logos.co/article/logos-basecamp
 
-Basecamp [0.1.2](https://github.com/logos-co/logos-basecamp/releases?q=0.1.2) is on it's way! Try the Release Candidate.
+Basecamp version [0.1.2](https://github.com/logos-co/logos-basecamp/releases?q=0.1.2) is on it's way! Try the Release Candidate.
 
 ## First build
 
@@ -22,14 +22,14 @@ Get the tools, build your first local app on Logos.
 
 ## Finding modules and corresponding repo urls
 
-As we approach the 0.1.2 release (currently on RC2), the module lists can be inspected in two ways:
+As we approach version 0.1.2 (currently on RC2), the module lists can be inspected in two ways:
 
 - "latest" or a release tag - showing all modules for master or that release
 - pre-release - showing the modules that were ready when the pre-release was made (likely not all modules)
 
-NOTE: this will become simpler when the 0.1.2 is released.
+NOTE: this will become simpler when version 0.1.2 is released.
 
-In these methods, you'll noteice most URLs can be manually searched for in [logos-co](https://github.com/logos-co), or [logos-blockchain](https://github.com/logos-blockchain) for some Blockchain and LEZ specific modules.
+Most URLs have been consolidated into [logos-co](https://github.com/logos-co), previously across [Messaging](https://github.com/logos-messaging/), [Storage](https://github.com/logos-storage/), and [Blockchain](https://github.com/logos-blockchain)
 
 Note: there is a wallet ui and wallet module in both logos-co, and logos-blockchain.
 
@@ -61,8 +61,26 @@ nix build 'github:logos-co/logos-package-downloader#cli' --out-link ./downloader
 
 (Ref: [Logos Developer Guide](https://github.com/logos-co/logos-tutorial/blob/master/logos-developer-guide.md#53-downloading-and-installing-from-a-registry))
 
-## Logos module in rust
+## The core between modules
 
-Logos Rust example module - https://github.com/logos-co/logos-rust-example-module
+The Logos core library (liblogos) handles the loading/unloading of modules, as well as invoking methods and passing events between modules.
 
-Uses Logos Rust SDK - https://github.com/logos-co/logos-rust-sdk
+```mermaid
+graph LR
+A(caller module) <-->|LogosSDK| C[liblogos]
+C[liblogos] <-->|LogosSDK| B(provider module)
+```
+
+See [Architecture](https://github.com/logos-co/logos-tutorial/blob/master/logos-developer-guide.md#architecture) in the developer guide for more details.
+
+### Logos SDKs
+
+A developer can use the following Logos language sdks to readily interact with modules:
+
+- [C++](https://github.com/logos-co/logos-cpp-sdk)
+- [Nim](https://github.com/logos-co/logos-nim-sdk)
+- [JavaScript](https://github.com/logos-co/logos-js-sdk)
+- [Rust](https://github.com/logos-co/logos-rust-sdk)
+  - [Example](https://github.com/logos-co/logos-rust-example-module) contains two modules (provider & caller), the `caller` using the sdk to interact with the `provider`
+
+List [here](https://github.com/logos-co/?q=logos-+-sdk&type=all&language=&sort=) SDK repos (and some extra from the non-regex filter).
