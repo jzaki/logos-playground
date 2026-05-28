@@ -4,6 +4,9 @@ This document is intended to get you right into understanding the essentials of 
 
 From Zero to Logos App in the shortest amount of time, with optional extras along the way.
 
+> [!NOTE]
+> A "Logos App" runs locally, whereas a "Logos Program" runs on the Logos Execution Zone (execution layer on top of the Logos Blockchain).
+
 # Concept Overview (optional)
 
 ## nix

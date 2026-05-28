@@ -12,9 +12,9 @@ Misc logos things, hopefully helpful.
 
 ## Logos Basecamp
 
-https://press.logos.co/article/logos-basecamp
+https://blog.logos.co/article/logos-basecamp
 
-Basecamp version [0.1.2](https://github.com/logos-co/logos-basecamp/releases?q=0.1.2) is on it's way! Try the latest Release Candidate.
+Basecamp version 0.1.2 is [here](https://github.com/logos-co/logos-basecamp/releases)!
 
 ## First build
 
@@ -23,12 +23,10 @@ Get the tools, build your first local app on Logos.
 
 ## Finding modules and corresponding repo urls
 
-As we approach version 0.1.2 (currently on RC3), the module lists can be inspected in two ways:
+The module lists can be inspected in two ways:
 
-- "latest" or a release tag - showing all modules for master or that release
+- "latest" or a release tag - showing all modules for master or that release (eg 0.1.2)
 - pre-release - showing the modules that were ready when the pre-release was made (likely not all modules)
-
-NOTE: this will become simpler when version 0.1.2 is released.
 
 Most URLs have been consolidated into [logos-co](https://github.com/logos-co), previously across [Messaging](https://github.com/logos-messaging/), [Storage](https://github.com/logos-storage/), and [Blockchain](https://github.com/logos-blockchain)
 
@@ -81,7 +79,7 @@ A developer can use the following Logos language sdks to readily interact with m
 - [C++](https://github.com/logos-co/logos-cpp-sdk)
 - [Nim](https://github.com/logos-co/logos-nim-sdk)
 - [JavaScript](https://github.com/logos-co/logos-js-sdk)
-- [Rust](https://github.com/logos-co/logos-rust-sdk)
+- [Rust](https://github.com/logos-co/logos-rust-sdk) (branch [new_api-test](https://github.com/logos-co/logos-rust-sdk/tree/new_api_test) to work with example)
   - [Example](https://github.com/logos-co/logos-rust-example-module) contains two modules (provider & caller), the `caller` using the sdk to interact with the `provider`
 
 List [here](https://github.com/logos-co/?q=logos-+-sdk&type=all&language=&sort=) SDK repos (and some extra from the non-regex filter).
