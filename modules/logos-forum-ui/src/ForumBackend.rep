@@ -1,0 +1,31 @@
+class ForumBackend
+{
+    ENUM ForumStatus {
+        Disconnected = 0,
+        Connecting   = 1,
+        Connected    = 2,
+        Stopping     = 3
+    }
+
+    // State
+    PROP(ForumStatus forumStatus READONLY)
+    PROP(QString myIdentity READONLY)
+    PROP(QString statusMessage READONLY)
+    PROP(QString currentForumName READONLY)
+    PROP(QString currentTopicId READONLY)
+
+    // Lifecycle
+    SLOT(void initForum())
+    SLOT(void stopForum())
+
+    // Navigation
+    SLOT(void selectTopic(QString topicId))
+
+    // Publishing
+    SLOT(void startNewTopic(QString topicTitle, QString content))
+    SLOT(void postReply(QString content))
+
+    // Signals (backend -> QML)
+    SIGNAL(error(QString message))
+    SIGNAL(topicCreated(QString topicId, QString topicTitle))
+}

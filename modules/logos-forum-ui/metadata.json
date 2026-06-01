@@ -1,0 +1,18 @@
+{
+  "name": "forum_ui",
+  "version": "1.0.0",
+  "type": "ui_qml",
+  "category": "forum",
+  "description": "Forum App for Logos - Anonymous public forum interface",
+  "main": "forum_ui_plugin",
+  "view": "qml/ForumView.qml",
+  "dependencies": ["forum_comms_module"],
+  "nix": {
+    "packages": {
+      "build": [],
+      "runtime": ["qt6.qtdeclarative", "zstd", "krb5", "abseil-cpp"]
+    },
+    "external_libraries": [],
+    "cmake": { "find_packages": [], "extra_sources": [] }
+  }
+}

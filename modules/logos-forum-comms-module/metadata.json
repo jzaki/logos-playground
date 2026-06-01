@@ -1,0 +1,20 @@
+{
+  "name": "forum_comms_module",
+  "version": "1.0.0",
+  "type": "core",
+  "category": "forum",
+  "description": "Forum Comms Module - Wraps logos-delivery for forum post send/receive",
+  "main": "forum_comms_plugin",
+  "dependencies": ["delivery_module"],
+  "nix": {
+    "packages": {
+      "build": [],
+      "runtime": ["qt6.qtbase"]
+    },
+    "external_libraries": [],
+    "cmake": {
+      "find_packages": [],
+      "extra_sources": []
+    }
+  }
+}
