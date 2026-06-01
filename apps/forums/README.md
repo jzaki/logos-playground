@@ -15,10 +15,10 @@ The first version is just text and ephemeral. V2 uses storage for larger sized c
 - A user will receive posts to forums they're subscribed to ("Logos Forum" is initially subscribed to)
 - A user can send a few types of public messages to the forum:
 
-| Type      | Topic | Text | Img (v2) | reply | Author |
-| --------- | ----- | ---- | -------- | ----- | ------ |
-| New topic | New   | post | opt.     | NA    | sig    |
-| Old topic | (id)  | post | opt.     | opt.  | sig    |
+| Type           | Topic | Text | Img (v2) | reply | Author |
+| -------------- | ----- | ---- | -------- | ----- | ------ |
+| New topic      | New   | post | opt.     | NA    | sig    |
+| Existing topic | (id)  | post | opt.     | opt.  | sig    |
 
 - Public posts directed to a subscribed forum are received and stored locally to render in a UI
 - V2: Images
@@ -74,11 +74,11 @@ Like logos-chat, but public with shared messaging topics to subscribe to.
 
 ```mermaid
 graph TD
-    ForumUI <-->|linked| AppBackend["C++<br>Backend"]
+    ForumUI <-->|linked| AppBackend["App<br>Backend"]
     AppBackend <-->|send/receive<br>posts per forum| ForumComms[Forum Comms<br>module]
     ForumComms <-->|send/receive<br>msgs per topic| logos-delivery
     ForumComms <--> MsgCodec[msg codec<br>lib/module]
-    AppBackend <-->|b| ForumStorage[Forum Storage<br>module]
+    AppBackend <-->|persist/restore<br>state| ForumStorage[Forum Storage<br>module]
     LocalStorage -->|read| ForumStorage
     ForumStorage -->|write| LocalStorage[Local<br>Storage]
     ForumStorage <-.-> SyncStore[V2:<br>Sync Store<br>module]
@@ -86,12 +86,37 @@ graph TD
     SyncStore -.->|store| LocalStorage
     LocalStorage -.->|share| SyncStore
     SyncStore <-.->|sync| logos-storage
-
 ```
 
 #### Assumptions
 
 - msg topics assumed to be long lived, so can be used between generic delivery and storage sync ("Sync Store")
+
+### Forum UI
+
+The user interacts with the UI as specified in [functional reqs](#functional-requirements).
+Action is taken via the C++ backend:
+
+- modify forum & topic subscriptions
+- send/receive posts
+- persist/load state to/from local storage
+
+### Forum Comms module
+
+- Wraps logos-delivery
+- Manages msg-topic subscriptions
+- Uses a module (starting as just a lib) to encode/decode forum posts to/from msgs
+  - helper functions between forum name/topics converstions can be here
+- Send/receive forum posts as delivery msgs
+
+### Forum Storage module
+
+- Saves forum posts to local storage, so previously received msgs can be restored.
+- Uses a module (start as a lib) to encode/decode many delivery msgs into blobs
+  - blobs scoped per forum/topic, and time-based
+- V2: sync blobs with others on the network via a wrapper to logos-storage
+
+---
 
 ### Forums (aka "cells")
 
