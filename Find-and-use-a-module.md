@@ -19,16 +19,18 @@ Doing things the Logos way, you still get app capabilities like messaging, stora
 
 ## The future - Logos Core modules!
 
-Get a taste of whats possible with existing modules: see this article https://press.logos.co/article/logos-basecamp, or read descriptions via [here](README.md#Finding-modules-and-corresponding-repo-urls)
+Get a taste of whats possible with existing modules: see this article https://blog.logos.co/article/logos-basecamp, or read descriptions via [here](README.md#Finding-modules-and-corresponding-repo-urls)
 
 **Modules all the way down...** You are early, modules build on top of modules, organically growing into a dominant ecosystem like Linux.
 
-Lets take a look them...
+Using a module from another
+
+Lets add one...
 
 ### Delivery
 
 **Delivery Module - High-level message-delivery API**
 
-An early resource can be found [here](https://github.com/logos-co/logos-docs/blob/c85b6bb6fec078f488fb2471a6851652f011ca9c/docs/messaging/journeys/use-the-logos-delivery-module-api-from-an-app.md) (in a [PR](https://github.com/logos-co/logos-docs/pull/226) ready for review).
-
 Logos [logos-delivery-module](https://github.com/logos-co/logos-delivery-module) wraps this [logos-delivery](https://github.com/logos-messaging/logos-delivery) library.
+
+Instructions to use this module can be found [here](https://github.com/logos-co/logos-docs/blob/c85b6bb6fec078f488fb2471a6851652f011ca9c/docs/messaging/journeys/use-the-logos-delivery-module-api-from-an-app.md) (in a [PR](https://github.com/logos-co/logos-docs/pull/226) ready for review).

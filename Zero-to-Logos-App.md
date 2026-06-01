@@ -71,7 +71,8 @@ From Zero to Logos App in the shortest amount of time, with optional extras alon
 
 # Hello Logos - standalone
 
-**Tip**: If using Codium (or other VSCode flavour), can use qt group and nix extensions for syntax highlighting etc.
+> [!info] If using Codium (or other VSCode flavour)
+> Use qt group and nix extensions for syntax highlighting etc.
 
 ## Logos module builder
 
@@ -97,17 +98,20 @@ If you want to use an tagged version: `nix flake init -t github:logos-co/logos-m
 Now run your app in standalone mode:
 `nix run` (which will also rebuild any changes)
 
-**Some nix tips**
-
-- The flake.nix file includes functionality input from the logos-module-builder
-- Run `nix flake update` to update the flake.lock file (eg when changing flake.nix, metadata, cmake files)
-- Remember to `git add` changes for nix to see them
+> [!tip] Some nix tips
+>
+> - The flake.nix file includes functionality input from the logos-module-builder
+> - Run `nix flake update` to update the flake.lock file (eg when changing flake.nix, metadata, cmake files)
+> - Remember to `git add` new files for nix to see them
 
 # Create portable artifact, and run in Basecamp
 
 - Download a recent version of Basecamp
   - v0.1.2 Release Candidate 3 [here](https://github.com/logos-co/logos-basecamp/releases/tag/untagged-b54c4d0ae59852515fb2)
   - Or an older [tagged version](https://github.com/logos-co/logos-basecamp/releases?q=prerelease%3Afalse&expanded=true)
+
+> [!tip] If reinstalling from an older version...
+> You may need to delete the Basecamp directory previously created: `$HOME/.local/share/Logos/LogosBasecamp`
 
 ## Build app into LGX package
 
