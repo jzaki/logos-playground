@@ -36,6 +36,34 @@ The first version is just text and ephemeral. V2 uses storage for larger sized c
 
 - A user can browse past posts that were sent when they were not subscribed to receive them
 
+### Usage overview
+
+```mermaid
+graph TD
+    User["User"]
+    Identity["Identity<br>(pub/priv key pair)"]
+    ForumApp["Forum App<br>(Basecamp)"]
+    Forum["Forum<br>(e.g. 'Logos Forum')"]
+    Topic["Forum Topic<br>& Posts"]
+    Post["Post<br>(signed by Identity)"]
+    Network["Network<br>(posts)"]
+    LocalStorage["Local<br>Storage"]
+    RemoteStorage["Logos-Storage<br>(V2: offline sync)"]
+
+    User -->|installs| ForumApp
+    ForumApp -->|generates| Identity
+    ForumApp -->|subscribes to| Forum
+    User -->|creates| Post
+    Identity -->|signs| Post
+    Post -->|new topic →<br>forum hash + name| Network
+    Post -->|old topic →<br>Forum hash + name + topic| Network
+    Network -->|received| Forum
+    Forum -->|contains| Topic
+    Forum -->|persists to| LocalStorage
+    Forum -.->|V2: remote sync| RemoteStorage
+
+```
+
 ## Arch/components
 
 NB: Based on current state of modules depended on, will evolve with updates to functionality & documentation.
@@ -43,6 +71,27 @@ NB: Based on current state of modules depended on, will evolve with updates to f
 ### Overview
 
 Like logos-chat, but public with shared messaging topics to subscribe to.
+
+```mermaid
+graph TD
+    ForumUI <-->|linked| AppBackend["C++<br>Backend"]
+    AppBackend <-->|send/receive<br>posts per forum| ForumComms[Forum Comms<br>module]
+    ForumComms <-->|send/receive<br>msgs per topic| logos-delivery
+    ForumComms <--> MsgCodec[msg codec<br>lib/module]
+    AppBackend <-->|b| ForumStorage[Forum Storage<br>module]
+    LocalStorage -->|read| ForumStorage
+    ForumStorage -->|write| LocalStorage[Local<br>Storage]
+    ForumStorage <-.-> SyncStore[V2:<br>Sync Store<br>module]
+    ForumStorage -.-> BlobCodec[blob codec<br>lib/module]
+    SyncStore -.->|store| LocalStorage
+    LocalStorage -.->|share| SyncStore
+    SyncStore <-.->|sync| logos-storage
+
+```
+
+#### Assumptions
+
+- msg topics assumed to be long lived, so can be used between generic delivery and storage sync ("Sync Store")
 
 ### Forums (aka "cells")
 
