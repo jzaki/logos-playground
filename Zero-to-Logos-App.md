@@ -89,14 +89,14 @@ nix flake update # generate flake.lock file
 git init && git add --all # for nix to see files to build
 ```
 
-If you want to use an tagged version: `nix flake init -t github:logos-co/logos-module-builder/<version-tag>#ui-qml-backend`, the version will need to correspond with a compatible version of Basecamp (next section).
+If you want to use a tagged version: `nix flake init -t github:logos-co/logos-module-builder/<version-tag>#ui-qml-backend`, the version will need to correspond with a compatible version of Basecamp (next section).
 
 ## Build and Run
 
 `nix build` will begin building. The first time is longest since it downloads and builds dependencies, these are cached for next time.
 
-Now run your app in standalone mode:
-`nix run` (which will also rebuild any changes)
+Now run your app in standalone mode (primarily for local dev):
+`nix run`
 
 > [!tip] Some nix tips
 >
@@ -106,8 +106,8 @@ Now run your app in standalone mode:
 
 # Create portable artifact, and run in Basecamp
 
-- Download a recent version of Basecamp
-  - v0.1.2 Release Candidate 3 [here](https://github.com/logos-co/logos-basecamp/releases/tag/untagged-b54c4d0ae59852515fb2)
+- Download the latest release of Basecamp
+  - [here](https://github.com/logos-co/logos-basecamp/releases/)
   - Or an older [tagged version](https://github.com/logos-co/logos-basecamp/releases?q=prerelease%3Afalse&expanded=true)
 
 > [!tip] If reinstalling from an older version...
@@ -115,8 +115,11 @@ Now run your app in standalone mode:
 
 ## Build app into LGX package
 
-To build the app as portable LGX package, run:
+To build the app as a portable LGX package, run:
 `nix build '.#lgx-portable' --out-link result-lgx-portable`
+
+> [!tip] `portable`
+> Portable adds a build step to combine dependencies ordinarily left referencing `/nix/store/...` sub-directories.
 
 ## A: Load LGX via Basecamp UI
 
@@ -131,7 +134,7 @@ Now run your application by clicking "Load Plugin" next to it. This will work fo
 Loading an app via Basecamp is great for sharing with others, but a little tedius for development.
 You can use the package manager cli (for portable builds), to do the same thing faster.
 
-First build the package manage cli that creates (portable) .lgx files of apps.
+First build the package manager cli that creates (portable) .lgx files of apps.
 
 - `nix build 'github:logos-co/logos-package-manager#cli-portable' --out-link ./pm-port`
   - Or, as before, a tagged version - `nix build 'github:logos-co/logos-package-manager/<version-tag>#cli-portable' --out-link ./pm-port-tag`
