@@ -18,6 +18,42 @@ Shown [here](Zero-to-Logos-Program.md#setup)
 - `nix build`
 - `nix run`
 
+## Optional: Configure nix c++ project for clangd checks
+
+Prerequisites:
+
+- Tool is installed: `clangd --version`
+- Terminal is in the project directory.
+- Project (namely dependencies) have been built: `nix build`
+
+For `clangd` to can better understand how the project is built, create the project's `compile_commands.json` with:
+`nix develop --command cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`
+
+Now create a `.clangd` file with these two paths
+
+```
+CompileFlags:
+  Add:
+    - "-isystem/nix/store/<qtbase hash>-qtbase-6.9.2/include"
+    - "-isystem/nix/store/<qtremoteobjects hash>-qtremoteobjects-6.9.2/include"
+```
+
+Populating your build hashes from your local `/nix/store`:
+
+- `ls /nix/store/ | grep qtbase`
+- `ls /nix/store/ | grep qtremoteobjects`
+
+Finally, ensure logos_sdk.h can be found (...)
+
+> [!TIP]
+> If using a vscode flavoured IDE (codium, cursor, ...), the clangd extension will use the above configuration
+
+Also:
+`.vscode/settings.json`
+{
+"clangd.fallbackFlags": ["${env:NIX_CFLAGS_COMPILE}"]
+}%
+
 ## Build app/module artifacts
 
 `nix build` ([options](https://github.com/logos-co/logos-module-builder/#4-build-your-module))
@@ -72,5 +108,5 @@ Create them if they don't exist: `mkdir $BASECAMP_DIR/modules && mkdir $BASECAMP
 - For modules: `cp -r result/modules/* $BASECAMP_DIR/modules/ && chmod -R u+w $BASECAMP_DIR/modules`
 - For plugins: `cp -r result/plugins/* $BASECAMP_DIR/plugins/ && chmod -R u+w $BASECAMP_DIR/plugins`
 
-> [!note] Why aren't there user write permissions?
+> [!NOTE] Why aren't there user write permissions?
 > The install artifacts were copied from the nix store, which intentionally does not have write permission set
