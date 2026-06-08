@@ -27,15 +27,28 @@ Prerequisites:
 - Project (namely dependencies) have been built: `nix build`
 
 For `clangd` to can better understand how the project is built, create the project's `compile_commands.json` with:
-`nix develop --command cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`
+`nix develop --command cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON  -Wno-dev`
 
-Now create a `.clangd` file with these two paths
+Now create a `.clangd` and add required include directories:
+
+```
+CompileFlags:
+  Add: [
+    - "-I/nix/store/<hash>-logos-cpp-sdk/include"
+  ]
+```
+
+Find your project's logos-cpp-sdk hash from the `nix develop` output (used above), in `LOGOS_CPP_SDK_ROOT`.
+
+Example [convenience script](https://github.com/logos-co/forum-sample-app/tree/master/scripts)
+
+### Qt types (pre-v3 examples)
 
 ```
 CompileFlags:
   Add:
-    - "-isystem/nix/store/<qtbase hash>-qtbase-6.9.2/include"
-    - "-isystem/nix/store/<qtremoteobjects hash>-qtremoteobjects-6.9.2/include"
+    - "-I/nix/store/<qtbase hash>-qtbase-6.9.2/include"
+    - "-I/nix/store/<qtremoteobjects hash>-qtremoteobjects-6.9.2/include"
 ```
 
 Populating your build hashes from your local `/nix/store`:
@@ -43,16 +56,9 @@ Populating your build hashes from your local `/nix/store`:
 - `ls /nix/store/ | grep qtbase`
 - `ls /nix/store/ | grep qtremoteobjects`
 
-Finally, ensure logos_sdk.h can be found (...)
 
 > [!TIP]
 > If using a vscode flavoured IDE (codium, cursor, ...), the clangd extension will use the above configuration
-
-Also:
-`.vscode/settings.json`
-{
-"clangd.fallbackFlags": ["${env:NIX_CFLAGS_COMPILE}"]
-}%
 
 ## Build app/module artifacts
 
